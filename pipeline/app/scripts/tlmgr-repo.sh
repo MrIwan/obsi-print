@@ -36,7 +36,8 @@ nope_tlmgr_repo() {
     n=0
     while [ "$n" -lt 3 ]; do
       m=$(curl -fsIL --max-time 20 -o /dev/null -w '%{url_effective}' \
-        "$ctan/tlpkg/texlive.tlpdb" 2>/dev/null) && [ -n "$m" ] && {
+        "$ctan/tlpkg/texlive.tlpdb" 2>/dev/null) && [ -n "$m" ] &&
+        nope_tlmgr_probe "$m" && {
         echo "${m%/tlpkg/texlive.tlpdb}"
         return
       }
@@ -49,9 +50,13 @@ nope_tlmgr_repo() {
 }
 
 nope_tlmgr_probe() {
+  # A plain HEAD/200 check is not enough, some mirrors return an HTML error page
+  # with HTTP 200 for missing files. Validate that we can read a tlpdb payload.
   if command -v curl >/dev/null 2>&1; then
-    curl -fsIL --max-time 20 "$1" >/dev/null 2>&1
+    curl -fsL --max-time 20 --range 0-4095 "$1" 2>/dev/null |
+      grep -qm1 '^name[[:space:]]'
   else
-    wget -q --spider --timeout=20 --tries=1 "$1" >/dev/null 2>&1
+    wget -q -O - --timeout=20 --tries=1 "$1" 2>/dev/null |
+      grep -qm1 '^name[[:space:]]'
   fi
 }
