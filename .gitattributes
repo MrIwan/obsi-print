@@ -1,0 +1,36 @@
+# Normalize line endings for this repo. Without this, a Windows checkout
+# (git's default core.autocrlf=true there) rewrites LF -> CRLF on every
+# text file. That silently breaks anything that gets sourced/executed by
+# /bin/sh in the Docker build (pipeline/app/scripts/*.sh) — dash chokes on
+# the trailing \r with "not found" / "Syntax error: end of file unexpected".
+#
+# After adding this, run `git add --renormalize .` once and commit so the
+# repo content itself is LF, regardless of which OS checks it out.
+
+* text=auto eol=lf
+
+*.sh          text eol=lf
+Dockerfile    text eol=lf
+Dockerfile.*  text eol=lf
+*.mjs         text eol=lf
+*.ts          text eol=lf
+*.tsx         text eol=lf
+*.js          text eol=lf
+*.cjs         text eol=lf
+*.json        text eol=lf
+*.yml         text eol=lf
+*.yaml        text eol=lf
+*.md          text eol=lf
+
+# Leave binaries alone
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.zip   binary

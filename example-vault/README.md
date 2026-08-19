@@ -15,19 +15,22 @@ feature of the **Nope** plugin (Markdown → PDF via Pandoc + LaTeX).
    also enable the core **Bases** plugin (Obsidian ≥ 1.10).
 4. Open a document and export it, or use the live PDF preview.
 
-## Creating a symlink
+## Creating a Linux/Mac
 
 Use this if you cloned the repo and want the vault to load Nope straight from
 your **local build** — every rebuild is picked up, with no copying.
 
 Obsidian looks for plugins in `<vault>/.obsidian/plugins/<id>/`. We point a
-`nope` link there at the repo root, which already holds `manifest.json` and the
+`nope` link there at the repo root, which holds `manifest.json` and the
 built `main.js`.
 
 Build the plugin once in the repo root, then create the link from the
 `example-vault/` root:
 
 ```bash
+# first time
+npm install
+
 # in the repo root: produce main.js
 npm run build
 
@@ -42,5 +45,30 @@ ln -s ../../.. .obsidian/plugins/nope
   points three levels up to the repo root.
 - After each rebuild, reload the plugin in Obsidian (toggle it off/on, or run
   *Reload app without saving*) so the new `main.js` is loaded.
+
+### Windows
+
+Use a real **Junction**  (works on the same drive, no admin rights or
+Developer Mode needed):
+
+```powershell
+# first time
+npm install
+
+# in the repo root: produce main.js
+npm run build
+
+# still in the repo root: link the plugin folder to the repo root
+New-Item -ItemType Directory -Force -Path "example-vault\.obsidian\plugins" | Out-Null
+New-Item -ItemType Junction -Path "example-vault\.obsidian\plugins\nope" -Target "$PWD"
+```
+
+- If a `nope.lnk` shortcut already exists there, delete it first
+  (`Remove-Item .obsidian\plugins\nope.lnk`) - Obsidian won't pick up the
+  plugin as long as it's present, even alongside a correct link.
+- `Get-Item example-vault\.obsidian\plugins\nope | Select LinkType` should
+  report `Junction` if it worked.
+- Same reload rule as above: after each rebuild, toggle the plugin off/on (or
+  *Reload app without saving*) to pick up the new `main.js`.
 
 
