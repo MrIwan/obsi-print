@@ -5,7 +5,7 @@ toc-own-page: true
 toc-depth: 3
 lof: false
 lot: false
-titlepage: true
+notitlepage: false
 titlepage-rule-height: 1
 header-left:
 numbersections: true
@@ -32,8 +32,9 @@ nope-branding: "[[branding-template]]"
 - **toc / toc-own-page / toc-title / toc-depth** — table of contents on/off,
   own page, title, depth (3 = down to `###`).
 - **lof / lot** — list of figures / list of tables on/off.
-- **titlepage** — title page on/off. When `false`, all `titlepage-*` keys are
-  ignored.
+- **notitlepage** — title page on/off, inverted (Eisvogel naming). Set to
+  `true` to suppress the title page entirely; when suppressed, all
+  `titlepage-*` styling keys below are ignored.
 - **titlepage-color** — title-page background colour, 6-digit hex without `#`.
 - **titlepage-text-color** — text colour for title, author and date.
 - **titlepage-rule-color / -height** — rule below the title.

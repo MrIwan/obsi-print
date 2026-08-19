@@ -410,15 +410,34 @@ local bib_fields = {
   { "keywords", "keywords" }, { "abstract", "abstract" },
 }
 
+-- Resolve an author:/editor: list item that is a whole-string wikilink to
+-- its BibTeX name text: the alias when present, else the link target with
+-- any heading/block suffix stripped.
+local function resolve_name_wikilink(s)
+  local trimmed = s:gsub("^%s+", ""):gsub("%s+$", "")
+  local target, alias = trimmed:match("^%[%[([^%]|]+)|([^%]]+)%]%]$")
+  if target then
+    return (alias:gsub("^%s+", ""):gsub("%s+$", ""))
+  end
+  target = trimmed:match("^%[%[([^%]|]+)%]%]$")
+  if target then
+    return strip_link_extras(target)
+  end
+  return s
+end
+
 -- Render a meta value as a BibTeX field body ({}-stripped), or nil to skip.
+-- author/editor list items also resolve a whole-item wikilink (resolve_name_wikilink).
 local function bib_value(field, v)
   if v == nil then return nil end
-  local sep = (field == "author" or field == "editor") and " and " or ", "
+  local resolve_names = (field == "author" or field == "editor")
+  local sep = resolve_names and " and " or ", "
   local raw
   if pandoc.utils.type(v) == "List" then
     local parts = {}
     for _, item in ipairs(v) do
       local s = pandoc.utils.stringify(item)
+      if resolve_names then s = resolve_name_wikilink(s) end
       if s ~= "" then table.insert(parts, s) end
     end
     raw = table.concat(parts, sep)

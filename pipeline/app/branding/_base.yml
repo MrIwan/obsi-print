@@ -9,7 +9,7 @@ lof: false # List of Figures
 lot: false # List of Tables
 
 # Title page settings
-titlepage: true
+notitlepage: false
 titlepage-color: "FFFFFF"
 titlepage-text-color: "1A1A1A"
 titlepage-background: /app/assets/bg-tiny.jpg

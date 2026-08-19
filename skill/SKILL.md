@@ -156,7 +156,7 @@ gls-type: acronym          # acronym | term
 
 ## Document and branding frontmatter
 
-Standard Pandoc/Eisvogel keys (`lang`, `toc`, `toc-depth`, `lof`, `lot`, `geometry`, `fontsize`, `titlepage`, `titlepage-logo`, `header-left`, link colors, …) work as usual. Precedence: **doc frontmatter > branding note > plugin `_base.yml`**.
+Standard Pandoc/Eisvogel keys (`lang`, `toc`, `toc-depth`, `lof`, `lot`, `geometry`, `fontsize`, `notitlepage`, `titlepage-logo`, `header-left`, link colors, …) work as usual. Precedence: **doc frontmatter > branding note > plugin `_base.yml`**.
 
 - **`book: true`** — switch to the book class (`scrbook`). `#` → part, `##` → chapter, `###` → section (default `article` maps `#` → section). Cross-refs to a `##` chapter read "Kapitel/Chapter"; a ref to a `#` part currently reads "Part N" (not localized).
 
@@ -195,6 +195,8 @@ pages: 33-58
 doi: 10.1000/xyz
 ---
 ```
+
+`author:`/`editor:` list items also accept a quoted wikilink instead of plain text: `"[[Note]]"` or `"[[Note|Alias]]"`. A bare `"[[Note]]"` uses the link text verbatim as the BibTeX name — `Ashish Vaswani`, not reordered; for `"Last, First"` order use the alias form: `"[[Ashish Vaswani|Vaswani, Ashish]]"`. The note doesn't need to exist yet — only the link syntax is read. Only the list form resolves wikilinks; the single-string shorthand below does not.
 
 Recognized fields: `author`, `editor`, `title`, `year`, `month`, `journal`, `booktitle`, `publisher`, `institution`, `school`, `organization`, `volume`, `number`, `pages`, `series`, `chapter`, `edition`, `address`, `doi`, `url`, `isbn`, `issn`, `howpublished`, `note`, `keywords`, `abstract`. A single author can also be one string (`author: "Smith, Jane and Doe, John"`). Reference it with `[[Smith 2020]]` anywhere in the document or in an embedded note. To set a CSL style for a citation-notes-only document, add a `bibliography:` `.bib` (even an empty one) so the `csl:` key takes effect.
 

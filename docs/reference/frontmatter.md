@@ -1,6 +1,6 @@
 # Frontmatter keys
 
-Standard Pandoc/Eisvogel keys (`title`, `author`, `lang`, `toc`, `toc-depth`, `lof`, `lot`, `geometry`, `fontsize`, `titlepage`, header/footer slots, link colors, …) work as usual. Precedence: **document frontmatter › branding note › defaults**.
+Standard Pandoc/Eisvogel keys (`title`, `author`, `lang`, `toc`, `toc-depth`, `lof`, `lot`, `geometry`, `fontsize`, `notitlepage`, header/footer slots, link colors, …) work as usual. Precedence: **document frontmatter › branding note › defaults**.
 
 ## Document level
 

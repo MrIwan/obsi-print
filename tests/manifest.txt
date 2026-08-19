@@ -23,6 +23,14 @@ must=Rumelhart
 must=CSLReferences
 must-not=[Not found:
 
+[features/feature-citation-author-links.md]
+must=Parmar
+must=Vaswani
+must=Shazeer
+must=Polosukhin
+must-not=[[
+must-not=[Not found:
+
 [features/feature-glossary.md]
 must=\gls{
 must=\newacronym

@@ -1,3 +1,13 @@
+# nope 0.7.4
+
+## New
+
+- **Wikilink-aware `author:`/`editor:` on citation atoms.** A list item can now be a real note link instead of only plain text: `"[[Ashish Vaswani]]"` uses the link text verbatim as the BibTeX name, `"[[Ashish Vaswani|Vaswani, Ashish]]"` uses the alias for `"Last, First"` order. No name-part reordering is attempted either way — that's what the alias is for. Plain strings keep working exactly as before, and the note doesn't need to exist. This lets an author also be a real person-note (backlinks, a Base listing their citation atoms via `file.hasLink(this.file)`) without a second, parallel frontmatter field to keep in sync. List form only; the single-string shorthand (`author: "Smith, Jane and Doe, John"`) is unchanged and does not parse wikilinks.
+
+## Documentation
+
+- `notitlepage` (not `titlepage`) is the key that actually turns off the title page — Eisvogel's inverted naming. `titlepage: false` was silently ignored everywhere it appeared: the branding template shipped by the "Create branding template" command, its copy in the example vault, the plugin's own `_base.yml` default, and both `docs/reference/frontmatter.md` and `skill/SKILL.md`. All five now document and use the working key.
+
 # nope 0.7.3
 
 A pipeline maintenance release. Nothing changes in how the plugin exports. The image hash changes, so the first export pulls the new image once.

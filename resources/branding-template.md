@@ -5,7 +5,7 @@ toc-own-page: true
 toc-depth: 3
 lof: true
 lot: true
-titlepage: true
+notitlepage: false
 titlepage-color: "FFFFFF"
 titlepage-text-color: "1A1A1A"
 titlepage-background: "[[bg.png]]"
@@ -50,7 +50,7 @@ writes the key for you. If unset, the plugin uses defaults from `_base.yml`.
 
 ### Title page
 
-- `titlepage`: Generate a title page.
+- `notitlepage`: Suppress the title page (inverted Eisvogel naming) — shown by default.
 - `titlepage-color`: Background color (hex without `#`, e.g. `FFFFFF`).
 - `titlepage-text-color`: Text color (hex without `#`).
 - `titlepage-background`: Full-width background image. Use a quoted wikilink,
