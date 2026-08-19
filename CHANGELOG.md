@@ -2,25 +2,20 @@
 
 ## New
 
-- **Wikilink-aware `author:`/`editor:` on citation atoms.** A list item can now be a real note link instead of only plain text: `"[[Ashish Vaswani]]"` uses the link text verbatim as the BibTeX name, `"[[Ashish Vaswani|Vaswani, Ashish]]"` uses the alias for `"Last, First"` order. No name-part reordering is attempted either way — that's what the alias is for. Plain strings keep working exactly as before, and the note doesn't need to exist. This lets an author also be a real person-note (backlinks, a Base listing their citation atoms via `file.hasLink(this.file)`) without a second, parallel frontmatter field to keep in sync. List form only; the single-string shorthand (`author: "Smith, Jane and Doe, John"`) is unchanged and does not parse wikilinks.
+- **Wikilink-aware `author:`/`editor:` on citation atoms.** A list item can now be a real note link instead of only plain text: `"[[Ashish Vaswani]]"` uses the link text verbatim as the BibTeX name, `"[[Ashish Vaswani|Vaswani, Ashish]]"` uses the alias for `"Last, First"` order. 
 
 ## Documentation
 
-- `notitlepage` (not `titlepage`) is the key that actually turns off the title page — Eisvogel's inverted naming. `titlepage: false` was silently ignored everywhere it appeared: the branding template shipped by the "Create branding template" command, its copy in the example vault, the plugin's own `_base.yml` default, and both `docs/reference/frontmatter.md` and `skill/SKILL.md`. All five now document and use the working key.
+- `notitlepage` (not `titlepage`) fixed in docu an examples. 
 
 # nope 0.7.3
 
-A pipeline maintenance release. Nothing changes in how the plugin exports. The image hash changes, so the first export pulls the new image once.
+A pipeline maintenance release. 
 
 ## Fixed
 
-- Image builds no longer break while the image's TeX Live year is the current release. The repo resolution now probes whether the frozen historic repo exists and uses plain CTAN otherwise. 0.7.2's image build failed exactly there: `tlnet-final` for TeX Live 2026 does not exist yet.
-- `tlmgr update --self` runs against the resolved repo before the package install. The base image's tlmgr lags behind the repo and refused to install.
+- Image builds no longer break while the image's TeX Live year is the current release.
 
-## Internal
-
-- All image builds (release, tests, wiki) share one BuildKit cache scope. Layers rebuild once per change instead of once per workflow.
-- The pipeline tests run weekly without cache. Time-dependent breakage like a TeX Live year rollover surfaces there instead of during a release build.
 
 # nope 0.7.2
 

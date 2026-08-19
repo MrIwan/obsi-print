@@ -4,6 +4,7 @@ caption: The example representation from the Mermaid documentation
 w: 60%
 scale: "3"
 ---
+
 ```mermaid
 erDiagram
     CUSTOMER ||--|| ANALYSE : ""
