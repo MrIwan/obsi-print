@@ -22,6 +22,8 @@ Link a note that carries a `citekey`: tracing JITs specialize dynamic-language c
 
 A minimal note with `citekey`, `author`, `title` and `year` also works [[cite-backprop]].
 
+A link with a heading/block suffix still resolves the citekey, not the suffix as text: [[cite-tracemonkey#^tm-note]].
+
 ## Bibliography
 
 ::: {#refs}

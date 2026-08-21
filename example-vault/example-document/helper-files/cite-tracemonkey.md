@@ -30,6 +30,8 @@ doi: 10.1145/1542476.1542528
 
 This is a citation atom: the `citekey` plus the BibTeX fields in the frontmatter are
 all the export needs — no `.bib` entry required. Reference it anywhere with
-`[[cite-tracemonkey]]`.
+`[[cite-tracemonkey]]`, including with a heading/block suffix like
+`[[cite-tracemonkey#^tm-note]]` — the suffix is only for navigating to this spot in
+Obsidian; export still resolves the citekey. ^tm-note
 
 PDF: https://mozilla.github.io/pdf.js/web/viewer.html

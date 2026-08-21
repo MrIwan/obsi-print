@@ -1057,12 +1057,17 @@ local function resolve_wikilink(link)
   target = target:gsub("^%./", "")
   target = target:gsub("%.md$", "")
 
+  -- Glossary/citation frontmatter lives on the note itself, so look those up
+  -- by the bare notename; a heading/block-id suffix (e.g. "#^abc123") is only
+  -- meaningful for the embed-target lookup below, which needs it intact.
+  local notename = parse_anchor(target)
+
   -- Try glossary first.
-  local gls = try_resolve_glossary(target)
+  local gls = try_resolve_glossary(notename)
   if gls then return gls end
 
   -- Then citation notes (citekey frontmatter) → \cite via a Cite node.
-  local cite = try_resolve_citation(target)
+  local cite = try_resolve_citation(notename)
   if cite then return cite end
 
   -- Try embed target; use \autoref for default display, \hyperref for custom text.

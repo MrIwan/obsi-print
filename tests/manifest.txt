@@ -22,6 +22,8 @@ must=Vaswani
 must=Rumelhart
 must=CSLReferences
 must-not=[Not found:
+must-not=tm-note
+must-not=cite-tracemonkey\#
 
 [features/feature-citation-author-links.md]
 must=Parmar

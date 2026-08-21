@@ -8,6 +8,10 @@
 
 - `notitlepage` (not `titlepage`) fixed in docu an examples. 
 
+## Fixed
+
+- `[[Note#Heading]]` / `[[Note#^blockid]]` links to a citation or glossary note fell back to plain text instead of resolving — the anchor suffix was never stripped before the lookup.
+
 # nope 0.7.3
 
 A pipeline maintenance release. 
